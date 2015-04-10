@@ -4,9 +4,18 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
 
   hit: ->
-    card = @deck.pop()
-    @add(card)
-    card
+#    if @isDealer
+    console.log @scores()[0]
+    while @scores()[0] < 17
+      @add(@deck.pop())
+      console.log @scores()[0]
+
+
+    # card = @deck.pop()
+    # @add(card)
+    # card
+
+  stand: ->
 
 
   hasAce: -> @reduce (memo, card) ->
