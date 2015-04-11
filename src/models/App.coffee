@@ -10,12 +10,17 @@ class window.App extends Backbone.Model
       .on 'ended', @dealerTurn , @
 
   dealerTurn: ->
-    @get 'dealerHand'
+    dealerHand = @get 'dealerHand'
+    # Flip card
+    dealerHand
       .at 0
       .flip()
 
-    @get 'dealerHand'
+    # hit until >= 17
+    dealerHand
       .hit()
+
+
 
 
 
