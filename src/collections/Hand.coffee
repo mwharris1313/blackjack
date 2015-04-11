@@ -7,7 +7,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     if @isDealer
-      while @scores()[0] < 17
+      while @scores()[0] < 17 or @scores()[1] < 17 # need to fix!! stop at 21!!
         @add(@deck.pop())
     else
       card = @deck.pop()
