@@ -9,6 +9,15 @@ class window.App extends Backbone.Model
     @get 'playerHand'
       .on 'ended', @dealerTurn , @
 
+    @get 'playerHand'
+      .on 'busted', @busted
+
+    @get 'dealerHand'
+      .on 'busted', @busted
+
+
+  busted: ->
+    console.log '**************** busted', @
   dealerTurn: ->
     dealerHand = @get 'dealerHand'
     # Flip card

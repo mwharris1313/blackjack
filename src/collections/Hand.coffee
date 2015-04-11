@@ -4,7 +4,7 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
     @on 'add', @isBust, @
 
-#@scores()[0] < 17
+    @isBusted = false
 
   hit: ->
     if @isDealer
@@ -26,8 +26,10 @@ class window.Hand extends Backbone.Collection
       @scores()[0] > 16
 
   isBust: ->
-   if @scores()[0] > 21
-      console.log 'bust'
+    if @scores()[0] > 21
+      @isBusted = true
+    else
+      @isBusted = false
 
 
   hasAce: -> @reduce (memo, card) ->

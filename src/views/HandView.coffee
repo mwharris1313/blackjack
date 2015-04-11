@@ -1,13 +1,20 @@
 class window.HandView extends Backbone.View
   className: 'hand'
 
-  template: _.template '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (<span class="score"></span>)</h2>'
-
+  template: _.template '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %><% if(isBusted){ %>Busted<% }else{ %><% } %>(<span class="score"></span>)</h2>'
   initialize: ->
     @collection.on 'add remove change', => @render()
     # @collection.on 'change:revealed', ->
     #   @set 'revealed', true
+
+    @collection.on 'busted', =>
+      console.log 'Handview Bust Event', @collection
+      @busted()
+
+
     @render()
+
+  busted: ->
 
   render: ->
  #   if @collection.scores()[0] isnt @collection.scores()[1] and @collection.scores()[1] <= 21    if
