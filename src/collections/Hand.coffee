@@ -4,11 +4,12 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
     @on 'add', @isBust, @
 
+#@scores()[0] < 17
 
   hit: ->
     if @isDealer
-      while @scores()[0] < 17 or @scores()[1] < 17 # need to fix!! stop at 21!!
-        @add(@deck.pop())
+      @add(@deck.pop()) until @doesDealerStop()
+
     else
       card = @deck.pop()
       @add(card)
@@ -16,6 +17,13 @@ class window.Hand extends Backbone.Collection
 
   stand: ->
     @trigger 'ended'
+
+  doesDealerStop: ->
+    if (@hasAce())
+      console.log("has ace")
+      ( @scores()[1] > 17 and @scores()[1] < 22 ) or @scores()[0] > 16
+    else
+      @scores()[0] > 16
 
   isBust: ->
    if @scores()[0] > 21
